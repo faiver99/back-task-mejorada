@@ -1,0 +1,3 @@
+MONGO_URI = mongodb+srv://felepe:4oVYNNdyk1KgLDKW@cluster0.huxgtdm.mongodb.net/back-task-list-mejorada?retryWrites=true&w=majority&appName=Cluster0
+PORT : 3000
+JWTOKEN =Mi_clave_secreta 
