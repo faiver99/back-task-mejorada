@@ -3,12 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
-const dotenv = require('dotenv');
+require('dotenv').config();
 
-dotenv.config();
 const router = express.Router();
 
-// Registro de usuarios
 router.post('/register', [
     body('username').isString().trim().isLength({ min: 3 }),
     body('password').isLength({ min: 6 }),
@@ -20,12 +18,10 @@ router.post('/register', [
     const { username, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({ username, password: hashedPassword, role });
-
     await user.save();
     res.json({ message: 'Usuario registrado' });
 });
 
-// Inicio de sesión
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
